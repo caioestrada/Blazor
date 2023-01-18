@@ -1,0 +1,38 @@
+﻿<div class="row">
+    <div class="col-sm-2 m-1">
+        <label>Grupo</label>
+        <select multiple class="form-control" @onchange="SelectGroup">
+            @foreach (var group in Groups)
+            {
+                <option value="@group.Key">@group.Value</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-3 m-1">
+        <label>Usuário</label>
+        <select class="form-control selectpicker" @bind="AuthorFilter.AuthorId">
+            <option>--</option>
+            @foreach (var author in Authors)
+            {
+                <option value="@author.Id">@author.Name</option>
+            }
+        </select>
+    </div>
+    <div class="col-sm-2 m-1">
+        <label>Data Inicial</label>
+        <input type="date" @bind="AuthorFilter.StartAt" data-type="start-date" class="form-control" placeholder="Data Inicio">
+    </div>
+    <div class="col-sm-2 m-1">
+        <label>Data Final</label>
+        <input type="date" @bind="AuthorFilter.EndAt" data-type="end-date" class="form-control" placeholder="Data Fim">
+    </div>
+    <div class="col m-1">
+        <button class="btn btn-primary mt-4" type="submit" @onclick="Search">
+            <i class="fas fa-search fa-sm text-white-50"></i> Buscar
+            <span id="loading" class="spinner-border spinner-border-sm" style="display: none"></span>
+        </button>
+        <button class="btn btn-success mt-4 float-right" type="button">
+            <i class="fas fa-file-excel fa-sm text-white-50"></i> Exportar
+        </button>
+    </div>
+</div> 

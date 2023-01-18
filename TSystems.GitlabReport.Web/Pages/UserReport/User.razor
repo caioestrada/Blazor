@@ -1,0 +1,51 @@
+﻿@page "/user"
+
+<PageTitle>User</PageTitle>
+
+<h1>Relatótio Usuários</h1>
+
+<FilterUserReport OnFilterSearch="authorsFilter => Search(authorsFilter)"></FilterUserReport>
+
+<div class="mt-5 mb-5">
+    <div class="row">
+        <div id="tableAuthor" class="card col-6">
+            <div class="card-body">
+                <h5 class="card-title">Usuários</h5>
+                <p class="card-text">Usuários com horas lançadas no período selecionado.</p>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Total de horas</th>
+                                <th scope="col">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (AuthorsByGroup != null)
+                            {
+                                @foreach (var author in AuthorsByGroup)
+                                {
+                                    <tr data-id="@author.AuthorId" style="cursor: pointer" class="author">
+                                        <td>
+                                            @author.AuthorName
+                                        </td>
+                                        <td class="font-weight-bold">
+                                            @*<span>@author.GetTotalTimeSpent()</span>h*@
+                                        </td>
+                                        <td>
+                                            @*<button data-toggle="tooltip" title="Ver detalhado" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#author_details_@author.AuthorId">
+                                    <i class="fa fa-history"></i>
+                                    </button>*@
+                                            @*<partial name="Reports/Partial/_DetailedAuthorModal" model="author" />*@
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
