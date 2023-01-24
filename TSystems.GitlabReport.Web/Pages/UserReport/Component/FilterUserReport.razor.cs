@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Radzen.Blazor;
+using Microsoft.AspNetCore.Components;
 using TSystems.GitlabReport.Web.Core.Interfaces;
 using TSystems.GitlabReport.Web.Core.Models.AuthorReport;
 
@@ -22,11 +23,6 @@ namespace TSystems.GitlabReport.Web.Pages.UserReport.Component
         {
             Authors = (await _authorService.GetAll()).ToList();
             Groups = await _groupService.GetAll();
-        }
-
-        private void SelectGroup(ChangeEventArgs group)
-        {
-            AuthorFilter.Groups = (group.Value as string[]).ToList();
         }
 
         private async Task Search()

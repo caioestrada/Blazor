@@ -8,7 +8,6 @@
 
         public string Name { get; set; }
 
-
         public string State { get; set; }
 
         public Uri AvatarUrl { get; set; }

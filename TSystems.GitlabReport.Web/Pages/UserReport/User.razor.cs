@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Radzen;
 using TSystems.GitlabReport.Web.Core.Interfaces;
 using TSystems.GitlabReport.Web.Core.Models.AuthorReport;
 
@@ -6,7 +7,8 @@ namespace TSystems.GitlabReport.Web.Pages.UserReport
 {
     public partial class User
     {
-        public List<AuthorMilestoneReportItem> AuthorsByGroup { get; set; } = new List<AuthorMilestoneReportItem>();
+        public List<AuthorWithMilestone> Authors { get; set; } = new List<AuthorWithMilestone>();
+        public List<MilestoneWithIssue> MilestonesByAuthor { get; set; } = new List<MilestoneWithIssue>();
 
         [Inject]
         private IAuthorService _authorService { get; set; }
@@ -17,7 +19,12 @@ namespace TSystems.GitlabReport.Web.Pages.UserReport
 
         private async Task Search(AuthorsFilter authorsFilter) 
         {
-            AuthorsByGroup = (await _authorService.Search(authorsFilter.Groups.FirstOrDefault().ToLower())).ToList();
+            Authors = (await _authorService.Search(authorsFilter)).ToList();
+        }
+
+        private async Task FindMilestonesByAuthor(DataGridCellMouseEventArgs<AuthorWithMilestone> args)
+        {
+            MilestonesByAuthor = args.Data.Milestones;
         }
     }
 }

@@ -18,9 +18,10 @@ namespace TSystems.GitlabReport.Web.Core.Services
             return await _httpClient.GetFromJsonAsync<IEnumerable<Author>>("authors");
         }
 
-        public async Task<IEnumerable<AuthorMilestoneReportItem>> Search(string group)
+        public async Task<IEnumerable<AuthorWithMilestone>> Search(AuthorsFilter authorsFilter)
         {
-            return await _httpClient.GetFromJsonAsync<IEnumerable<AuthorMilestoneReportItem>>($"authors/search?group={group}");
+            using var response = await _httpClient.PostAsJsonAsync("authors/search", authorsFilter);
+            return await response.Content.ReadFromJsonAsync<IEnumerable<AuthorWithMilestone>>();
         }
     }
 }

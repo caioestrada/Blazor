@@ -1,22 +1,21 @@
 ﻿<div class="row">
     <div class="col-sm-2 m-1">
         <label>Grupo</label>
-        <select multiple class="form-control" @onchange="SelectGroup">
-            @foreach (var group in Groups)
-            {
-                <option value="@group.Key">@group.Value</option>
-            }
-        </select>
+        <RadzenDropDown Multiple="true" Chips="true"
+                        MaxSelectedLabels="20" AllowClear="true"
+                        AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                        Data=@Groups @bind-Value=@AuthorFilter.GroupsPath
+                        TextProperty="Key" ValueProperty="Value"
+                        Class="form-control" />
     </div>
     <div class="col-sm-3 m-1">
         <label>Usuário</label>
-        <select class="form-control selectpicker" @bind="AuthorFilter.AuthorId">
-            <option>--</option>
-            @foreach (var author in Authors)
-            {
-                <option value="@author.Id">@author.Name</option>
-            }
-        </select>
+        <RadzenDropDown Multiple="true" Chips="true"
+                        MaxSelectedLabels="20" AllowClear="true"
+                        AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                        Data=@Authors @bind-Value=@AuthorFilter.Authors
+                        TextProperty="Name" ValueProperty="Id"
+                        Class="form-control" />
     </div>
     <div class="col-sm-2 m-1">
         <label>Data Inicial</label>

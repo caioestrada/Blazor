@@ -5,6 +5,6 @@ namespace TSystems.GitlabReport.Web.Core.Interfaces
     public interface IAuthorService
     {
         Task<IEnumerable<Author>> GetAll();
-        Task<IEnumerable<AuthorMilestoneReportItem>> Search(string group);
+        Task<IEnumerable<AuthorWithMilestone>> Search(AuthorsFilter authorsFilter);
     }
 }
