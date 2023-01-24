@@ -10,6 +10,7 @@ namespace TSystems.GitlabReport.Web.Pages.UserReport.Component
         public List<Author> Authors { get; set; } = new List<Author>();
         public Dictionary<string, string> Groups { get; set; } = new Dictionary<string, string>();
         public AuthorsFilter AuthorFilter { get; set; } = new AuthorsFilter();
+        private bool hideLoader = true;
 
         [Parameter]
         public EventCallback<AuthorsFilter> OnFilterSearch { get; set; }
@@ -27,7 +28,9 @@ namespace TSystems.GitlabReport.Web.Pages.UserReport.Component
 
         private async Task Search()
         {
+            hideLoader = false;
             await OnFilterSearch.InvokeAsync(AuthorFilter);
+            hideLoader = true;
         }
     }
 }

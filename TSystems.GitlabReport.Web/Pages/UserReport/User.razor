@@ -10,22 +10,28 @@
 
 <div class="row mt-3 mb-3">
     <div class="col-6">
-        <RadzenDataGrid Data="@Authors"
-                        AllowFiltering="true"
+
+
+        <RadzenDataGrid CellContextMenu="@FindMilestonesByAuthor"
                         CellClick="@FindMilestonesByAuthor"
+                        Data="@Authors"
+                        @bind-Value=@selectedAuthors
                         TItem="AuthorWithMilestone"
+                        AllowPaging="true"
+                        PageSize="8"
+                        AllowFiltering="true"
                         AllowColumnResize="true"
                         AllowSorting="true"
-                        Style="cursor: pointer">
+                        SelectionMode="DataGridSelectionMode.Single"
+                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
             <Columns>
-                <RadzenDataGridColumn TItem="AuthorWithMilestone" Sortable="false" Width="80px">
+                <RadzenDataGridColumn TItem="AuthorWithMilestone" Sortable="false" Width="80px" TextAlign="TextAlign.Center">
                     <Template Context="data">
                         <RadzenImage Path="@data.AvatarUrl" class="rz-gravatar" />
                     </Template>
                 </RadzenDataGridColumn>
-                @*<RadzenDataGridColumn TItem="AuthorMilestoneReportItem" Property="AuthorId" Title="AuthorId" TextAlign="TextAlign.Center" />*@
-                <RadzenDataGridColumn TItem="AuthorWithMilestone" Property="AuthorName" Title="Nome" />
-                <RadzenDataGridColumn TItem="AuthorWithMilestone" Property="TotalTimeSpent" Title="Tempo" >
+                <RadzenDataGridColumn TItem="AuthorWithMilestone" Property="AuthorName" Title="Nome" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="AuthorWithMilestone" Property="TotalTimeSpent" Title="Tempo" TextAlign="TextAlign.Center">
                     <Template Context="author">
                         @String.Format("{0} h", author.TotalTimeSpent)
                     </Template>
@@ -34,16 +40,40 @@
         </RadzenDataGrid>
     </div>
     <div class="col-6">
-        <RadzenDataGrid Data="@MilestonesByAuthor"
-                        AllowFiltering="true"
+        <RadzenDataGrid CellContextMenu="@FindIssuesByMilestones"
+                        CellClick="@FindIssuesByMilestones"
+                        Data="@MilestonesByAuthor"
+                        @bind-Value=@selectedMilestones
                         TItem="MilestoneWithIssue"
+                        AllowPaging="true"
+                        PageSize="8"
+                        AllowFiltering="true"
+                        AllowColumnResize="true"
+                        AllowSorting="true"
+                        SelectionMode="DataGridSelectionMode.Single"
+                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive">
+            <Columns>
+                <RadzenDataGridColumn TItem="MilestoneWithIssue" Property="MilestoneTitle" Title="Fase" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="MilestoneWithIssue" Property="TotalTimeSpent" Title="Tempo" TextAlign="TextAlign.Center">
+                    <Template Context="milestone">
+                        @String.Format("{0} h", milestone.TotalTimeSpent)
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+
+        <hr class="mt-2 mb-2" />
+
+        <RadzenDataGrid Data="@IssuesByMilestone"
+                        AllowFiltering="true"
+                        TItem="IssueWithSpendNote"
                         AllowColumnResize="true"
                         AllowSorting="true">
             <Columns>
-                <RadzenDataGridColumn TItem="MilestoneWithIssue" Property="MilestoneTitle" Title="Fase" />
-                <RadzenDataGridColumn TItem="MilestoneWithIssue" Property="TotalTimeSpent" Title="Tempo">
-                    <Template Context="milestone">
-                        @String.Format("{0} h", milestone.TotalTimeSpent)
+                <RadzenDataGridColumn TItem="IssueWithSpendNote" Property="IssueTitle" Title="Card" TextAlign="TextAlign.Center" />
+                <RadzenDataGridColumn TItem="IssueWithSpendNote" Property="TotalTimeSpent" Title="Tempo" TextAlign="TextAlign.Center">
+                    <Template Context="issue">
+                        @String.Format("{0} h", issue.TotalTimeSpent)
                     </Template>
                 </RadzenDataGridColumn>
             </Columns>

@@ -28,7 +28,7 @@
     <div class="col m-1">
         <button class="btn btn-primary mt-4" type="submit" @onclick="Search">
             <i class="fas fa-search fa-sm text-white-50"></i> Buscar
-            <span id="loading" class="spinner-border spinner-border-sm" style="display: none"></span>
+            <span class="spinner-border text-light spinner-border-sm ml-2" role="status" hidden="@hideLoader"></span>
         </button>
         <button class="btn btn-success mt-4 float-right" type="button">
             <i class="fas fa-file-excel fa-sm text-white-50"></i> Exportar
