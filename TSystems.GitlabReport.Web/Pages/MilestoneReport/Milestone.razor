@@ -1,0 +1,21 @@
+﻿@page "/milestone"
+
+<PageTitle>Fases</PageTitle>
+
+<h1>Relatório Fases</h1>
+
+<FilterMilestoneReport OnFilterSearch="authorsFilter => Search(authorsFilter)"></FilterMilestoneReport>
+
+<hr />
+<div class="mb-3">
+    <RadzenDataGrid Data="@Milestones"
+                    AllowFiltering="true"
+                    TItem="Core.Models.Milestone.Milestone"
+                    AllowColumnResize="true"
+                    AllowSorting="true">
+        <Columns>
+            <RadzenDataGridColumn TItem="Core.Models.Milestone.Milestone" Property="Title" Title="Fase" TextAlign="TextAlign.Center" />
+            <RadzenDataGridColumn TItem="Core.Models.Milestone.Milestone" Property="State" Title="Status" TextAlign="TextAlign.Center" />
+        </Columns>
+    </RadzenDataGrid>
+</div>

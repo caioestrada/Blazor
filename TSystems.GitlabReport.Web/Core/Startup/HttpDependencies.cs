@@ -14,6 +14,7 @@ namespace TSystems.GitlabReport.Web.Core.Startup
             builder.Services.AddHttpClient<IAuthorService, AuthorService>(client => { client.BaseAddress = new Uri(apiGitlab); });
             builder.Services.AddHttpClient<IGroupService, GroupService>(client => { client.BaseAddress = new Uri(apiGitlab); });
             builder.Services.AddHttpClient<IPipelineService, PipelineService>(client => { client.BaseAddress = new Uri(apiGitlab); });
+            builder.Services.AddHttpClient<IMilestoneService, MilestoneService>(client => { client.BaseAddress = new Uri(apiGitlab); });
         }
     }
 }

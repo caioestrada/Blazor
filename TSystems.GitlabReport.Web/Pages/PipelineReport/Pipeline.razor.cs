@@ -21,9 +21,11 @@ namespace TSystems.GitlabReport.Web.Pages.PipelineReport
 
         protected override async Task OnInitializedAsync()
         {
+            hideLoader = false;
             LoadPeriods();
 
             Groups = (await _pipelineService.GetAllByYear(DateTime.Now.Year)).ToList();
+            hideLoader = true;
         }
 
         private void LoadPeriods()
